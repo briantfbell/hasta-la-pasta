@@ -11,6 +11,7 @@ name
 prep_time
 cook_time
 servings
+image_url
 pasta_type_id FK -> pasta_types.id
 
 ingredients
@@ -18,6 +19,7 @@ ingredients
 id PK
 name
 default_unit
+category
 
 recipe_ingredients
 ---------
