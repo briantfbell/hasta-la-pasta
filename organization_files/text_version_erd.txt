@@ -1,0 +1,35 @@
+pasta_types
+---------
+id PK
+name
+description
+
+recipes
+---------
+id PK
+name
+prep_time
+cook_time
+servings
+pasta_type_id FK -> pasta_types.id
+
+ingredients
+---------
+id PK
+name
+default_unit
+
+recipe_ingredients
+---------
+id PK
+recipe_id FK -> recipes.id
+ingredient_id FK -> ingredients.id
+quantity
+unit
+
+steps
+---------
+id PK
+recipe_id FK -> recipes.id
+step_number
+instruction

@@ -1,0 +1,41 @@
+Core Recipe Functionality
+* As a user, I can view a list of all pasta recipes
+* As a user, I can view details of a single recipe, including ingredients and instructions
+* As a user, I can create a new recipe
+* As a user, I can edit an existing recipe
+* As a user, I can delete a recipe
+
+Steps
+* As a user, I can view the steps for a recipe in order
+* As a user, I can add a step to a recipe
+* As a user, I can edit a step
+* As a user, I can delete a step
+
+Ingredients
+* As a user, I can view a list of all ingredients
+* As a user, I can add a new ingredient
+* As a user, I can edit an ingredient
+* As a user, I can delete an ingredient
+
+Recipe <-> Ingredient Relationship
+* As a user, I can add an ingredient to a recipe with a quantity and unit
+* As a user, I can remove an ingredient from a recipe
+* As a user, I can update the quantity of an ingredient in a recipe
+* As a user, I can view all ingredients associated with a recipe
+* As a user, I can view all recipes that use a specific ingredient
+
+Pasta Types
+* As a user, I can view all pasta types
+* As a user, I can create a new pasta type
+* As a user, I can edit a pasta type
+* As a user, I can delete a pasta type
+* As a user, I can view all recipes for a specific pasta type
+
+Filtering / Discovery
+* As a user, I can filter recipes by pasta type
+* As a user, I can search for recipes by name
+* As a user, I can filter recipes by ingredient
+
+Optional
+* As a user, I can see total prep + cook time for a recipe
+* As a user, I can see ingredient units (grams, cups, etc.)
