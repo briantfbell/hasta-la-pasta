@@ -49,8 +49,10 @@
 .recipeList {
   list-style: none;
   padding: 0;
-  margin: 0;
   margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .recipeItem {
@@ -58,16 +60,65 @@
 }
 
 .recipeLink {
+  display: inline-block;
   background-color: #f4873b;
   color: black;
   padding: 8px 16px;
   border-radius: 20px;
   text-decoration: none;
   font-weight: bold;
+  width: fit-content;
 }
 
 .recipeLink:hover {
   background-color: #e07530;
+}
+
+.recipeCard {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 14px;
+  background-color: #fff;
+}
+
+.recipeImage {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  flex-shrink: 0;
+}
+
+.recipeContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.tagRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #efefef;
+  border: 1px solid #999;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.recipeDescription {
+  margin: 0;
+  color: #444;
+  line-height: 1.4;
 }
 
 .addLink {

@@ -88,13 +88,34 @@ export default function HomePage() {
           ) : (
             <ul className={styles.recipeList}>
               {filteredRecipes.map((recipe) => (
-                <li key={recipe.id} className={styles.recipeItem}>
-                  <Link
-                    to={`/recipes/${recipe.id}`}
-                    className={styles.recipeLink}
-                  >
-                    {recipe.name}
-                  </Link>
+                <li key={recipe.id} className={styles.recipeCard}>
+                  <img
+                    src={recipe.image_url || "/images/placeholder.jpg"}
+                    alt={recipe.name}
+                    className={styles.recipeImage}
+                  />
+
+                  <div className={styles.recipeContent}>
+                    <Link
+                      to={`/recipes/${recipe.id}`}
+                      className={styles.recipeLink}
+                    >
+                      {recipe.name}
+                    </Link>
+
+                    <div className={styles.tagRow}>
+                      <span className={styles.tag}>
+                        {recipe.sauce_type || "unknown"} sauce
+                      </span>
+                      <span className={styles.tag}>
+                        {recipe.meat_type || "unknown"}
+                      </span>
+                    </div>
+
+                    <p className={styles.recipeDescription}>
+                      {recipe.short_description || "No description available."}
+                    </p>
+                  </div>
                 </li>
               ))}
             </ul>
