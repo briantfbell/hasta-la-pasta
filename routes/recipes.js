@@ -105,18 +105,61 @@ router.get("/:id/ingredients", async (req, res, next) => {
 // POST /api/recipes
 router.post("/", async (req, res, next) => {
   try {
-    const { name, prep_time, cook_time, servings, image_url, pasta_type_id } =
-      req.body;
+    const {
+      name,
+      prep_time,
+      cook_time,
+      servings,
+      image_url,
+      pasta_type_id,
+      meat_type,
+      sauce_type,
+      ingredients,
+      steps,
+    } = req.body;
 
     const result = await db.query(
       `INSERT INTO recipes
-       (name, prep_time, cook_time, servings, image_url, pasta_type_id)
-       VALUES ($1, $2, $3, $4, $5, $6)
+       (name, prep_time, cook_time, servings, image_url, pasta_type_id, meat_type, sauce_type)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
        RETURNING *`,
-      [name, prep_time, cook_time, servings, image_url, pasta_type_id],
+      [
+        name,
+        prep_time,
+        cook_time,
+        servings,
+        image_url,
+        pasta_type_id,
+        meat_type,
+        sauce_type,
+      ],
     );
 
-    res.status(201).json(result.rows[0]);
+    const recipe = result.rows[0];
+
+    // Insert ingredients
+    if (ingredients && ingredients.length) {
+      for (const ing of ingredients) {
+        await db.query(
+          `INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity, unit)
+           VALUES ($1, $2, $3, $4)`,
+          [recipe.id, ing.ingredient_id, ing.quantity, ing.unit],
+        );
+      }
+    }
+
+    // Insert steps
+    if (steps && steps.length) {
+      for (let i = 0; i < steps.length; i++) {
+        await db.query(
+          `INSERT INTO steps (recipe_id, step_number, instruction)
+           VALUES ($1, $2, $3)`,
+          [recipe.id, i + 1, steps[i]],
+        );
+      }
+    }
+
+    res.status(201).json(recipe);
   } catch (err) {
     next(err);
   }
@@ -126,20 +169,34 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { name, prep_time, cook_time, servings, image_url, pasta_type_id } =
-      req.body;
+    const {
+      name,
+      prep_time,
+      cook_time,
+      servings,
+      image_url,
+      pasta_type_id,
+      meat_type,
+      sauce_type,
+    } = req.body;
 
     const result = await db.query(
       `UPDATE recipes
-       SET name = $1,
-           prep_time = $2,
-           cook_time = $3,
-           servings = $4,
-           image_url = $5,
-           pasta_type_id = $6
-       WHERE id = $7
+       SET name = $1, prep_time = $2, cook_time = $3, servings = $4,
+           image_url = $5, pasta_type_id = $6, meat_type = $7, sauce_type = $8
+       WHERE id = $9
        RETURNING *`,
-      [name, prep_time, cook_time, servings, image_url, pasta_type_id, id],
+      [
+        name,
+        prep_time,
+        cook_time,
+        servings,
+        image_url,
+        pasta_type_id,
+        meat_type,
+        sauce_type,
+        id,
+      ],
     );
 
     if (!result.rows.length) {
