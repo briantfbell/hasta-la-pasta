@@ -1,0 +1,101 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.panel {
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.panelHeader {
+  background-color: #3d3d3d;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* Padding rule: top, right, bottom, left (think: clockwise from top) */
+.pageTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 20px 20px 20px 20px;
+}
+
+.addLink:hover {
+  text-decoration: underline;
+}
+
+.recipeList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin: 8px 0 0 0;
+}
+
+.recipeItem {
+  margin-bottom: 22px;
+}
+
+.recipeLink {
+  background-color: #f4873b;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.recipeLink:hover {
+  background-color: #e07530;
+}
+
+.addLink {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-weight: bold;
+  color: #f4873b;
+  text-decoration: none;
+}
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.filterLabel {
+  font-weight: bold;
+  min-width: 80px;
+}
+
+.filterSelect {
+  background-color: #f4873b;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.clearButton {
+  background-color: #f4873b;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.clearButton:hover {
+  background-color: #e07530;
+  cursor: pointer;
+}

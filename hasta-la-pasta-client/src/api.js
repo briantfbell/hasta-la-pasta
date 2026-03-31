@@ -1,18 +1,35 @@
 const BASE_URL = "http://localhost:3001/api";
 
+async function handleResponse(res) {
+  if (!res.ok) {
+    let errorMessage = "Request failed";
+
+    try {
+      const errorData = await res.json();
+      errorMessage = errorData.error || errorMessage;
+    } catch {
+      // ignore JSON parse failure
+    }
+
+    throw new Error(errorMessage);
+  }
+
+  return res.json();
+}
+
 export async function getRecipes() {
   const res = await fetch(`${BASE_URL}/recipes`);
-  return res.json();
+  return handleResponse(res);
 }
 
 export async function getRecipe(id) {
   const res = await fetch(`${BASE_URL}/recipes/${id}`);
-  return res.json();
+  return handleResponse(res);
 }
 
 export async function getPastaTypes() {
   const res = await fetch(`${BASE_URL}/pasta-types`);
-  return res.json();
+  return handleResponse(res);
 }
 
 export async function createRecipe(data) {
@@ -21,7 +38,7 @@ export async function createRecipe(data) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  return res.json();
+  return handleResponse(res);
 }
 
 export async function updateRecipe(id, data) {
@@ -30,12 +47,12 @@ export async function updateRecipe(id, data) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  return res.json();
+  return handleResponse(res);
 }
 
 export async function deleteRecipe(id) {
   const res = await fetch(`${BASE_URL}/recipes/${id}`, {
     method: "DELETE",
   });
-  return res.json();
+  return handleResponse(res);
 }

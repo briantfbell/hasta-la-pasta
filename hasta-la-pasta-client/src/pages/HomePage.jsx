@@ -1,11 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { getRecipes } from "../api";
+import styles from "./HomePage.module.css";
 
 export default function HomePage() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // States for filter portion
+  const [selectedMeatType, setSelectedMeatType] = useState("");
+  const [selectedSauceType, setSelectedSauceType] = useState("");
 
   useEffect(() => {
     async function loadRecipes() {
@@ -16,7 +21,7 @@ export default function HomePage() {
         setRecipes(data);
       } catch (err) {
         console.error(err);
-        setError("Failed to load recipes.");
+        setError(err.message || "Failed to load recipes.");
       } finally {
         setLoading(false);
       }
@@ -25,10 +30,23 @@ export default function HomePage() {
     loadRecipes();
   }, []);
 
+  // Recipe filter/search function
+  const filteredRecipes = useMemo(() => {
+    return recipes.filter((recipe) => {
+      const matchesMeat =
+        !selectedMeatType || recipe.meat_type === selectedMeatType;
+
+      const matchesSauce =
+        !selectedSauceType || recipe.sauce_type === selectedSauceType;
+
+      return matchesMeat && matchesSauce;
+    });
+  }, [recipes, selectedMeatType, selectedSauceType]);
+
   if (loading) {
     return (
       <main>
-        <h1>Hasta la Pasta</h1>
+        <h1 className={styles.pageTitle}>Hasta la Pasta</h1>
         <p>Loading recipes...</p>
       </main>
     );
@@ -46,25 +64,78 @@ export default function HomePage() {
   return (
     <main>
       <h1>Hasta la Pasta</h1>
+      <div className={styles.layout}>
+        {/* Recipes Panel */}
+        <section className={styles.panel}>
+          <h2 className={styles.panelHeader}>Recipes</h2>
+          <div>
+            <Link to="/recipes/new" className={styles.addLink}>
+              + Add New Recipe
+            </Link>
+          </div>
+          {filteredRecipes.length === 0 ? (
+            <p>No recipes match your filter.</p>
+          ) : (
+            <ul className={styles.recipeList}>
+              {filteredRecipes.map((recipe) => (
+                <li key={recipe.id} className={styles.recipeItem}>
+                  <Link
+                    to={`/recipes/${recipe.id}`}
+                    className={styles.recipeLink}
+                  >
+                    {recipe.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
 
-      <div>
-        <Link to="/recipes/new">Add New Recipe</Link>
+        {/* Filter Panel */}
+        <section className={styles.panel}>
+          <h2 className={styles.panelHeader}>Find a Pasta</h2>
+          <div className={styles.filterRow}>
+            <label className={styles.filterLabel} htmlFor="meatType">
+              Meat
+            </label>
+            <select
+              className={styles.filterSelect}
+              id="meatType"
+              value={selectedMeatType}
+              onChange={(e) => setSelectedMeatType(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="pork">Pork</option>
+              <option value="beef">Beef</option>
+              <option value="chicken">Chicken</option>
+            </select>
+          </div>
+          <div className={styles.filterRow}>
+            <label className={styles.filterLabel} htmlFor="sauceType">
+              Sauce
+            </label>
+            <select
+              className={styles.filterSelect}
+              id="sauceType"
+              value={selectedSauceType}
+              onChange={(e) => setSelectedSauceType(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="red">Red</option>
+              <option value="white">White</option>
+            </select>
+          </div>
+          <button
+            className={styles.clearButton}
+            onClick={() => {
+              setSelectedMeatType("");
+              setSelectedSauceType("");
+            }}
+          >
+            Clear Filters
+          </button>
+        </section>
       </div>
-
-      <h2>Recipes</h2>
-
-      {recipes.length === 0 ? (
-        <p>No recipes found.</p>
-      ) : (
-        <ul>
-          {recipes.map((recipe) => (
-            <li key={recipe.id}>
-              <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
-              {recipe.pasta_type_name ? ` - ${recipe.pasta_type_name}` : ""}
-            </li>
-          ))}
-        </ul>
-      )}
     </main>
   );
 }
