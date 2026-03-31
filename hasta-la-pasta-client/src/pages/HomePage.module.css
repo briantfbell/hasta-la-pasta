@@ -22,10 +22,24 @@
 }
 
 /* Padding rule: top, right, bottom, left (think: clockwise from top) */
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
 .pageTitle {
   font-size: 2rem;
   font-weight: bold;
-  padding: 20px 20px 20px 20px;
+  margin: 0;
+}
+
+.pageSubtitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #555;
 }
 
 .addLink:hover {

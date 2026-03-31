@@ -46,7 +46,10 @@ export default function HomePage() {
   if (loading) {
     return (
       <main>
-        <h1 className={styles.pageTitle}>Hasta la Pasta</h1>
+        <div className={styles.headerRow}>
+          <h1 className={styles.pageTitle}>Hasta la Pasta</h1>
+          <h2 className={styles.pageSubtitle}>The Easy Pasta Cookbook App!</h2>
+        </div>
         <p>Loading recipes...</p>
       </main>
     );
@@ -55,7 +58,10 @@ export default function HomePage() {
   if (error) {
     return (
       <main>
-        <h1>Hasta la Pasta</h1>
+        <div className={styles.headerRow}>
+          <h1 className={styles.pageTitle}>Hasta la Pasta</h1>
+          <h2 className={styles.pageSubtitle}>The Easy Pasta Cookbook App!</h2>
+        </div>
         <p>{error}</p>
       </main>
     );
@@ -63,7 +69,11 @@ export default function HomePage() {
 
   return (
     <main>
-      <h1>Hasta la Pasta</h1>
+      <div className={styles.headerRow}>
+        <h1 className={styles.pageTitle}>Hasta la Pasta</h1>
+        <h2 className={styles.pageSubtitle}>The Easy Pasta Cookbook App!</h2>
+      </div>
+
       <div className={styles.layout}>
         {/* Recipes Panel */}
         <section className={styles.panel}>
