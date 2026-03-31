@@ -16,10 +16,10 @@
 }
 
 .homeLink {
-  background-color: #e4e4e4;
+  background-color: #f4873b;
   font-size: 1.5rem;
   text-decoration: none;
-  color: #3d3d3d;
+  color: #000000;
   padding: 8px 24px;
   border-radius: 10px;
   font-size: 1.2rem;
@@ -28,7 +28,7 @@
 }
 
 .homeLink:hover {
-  background-color: #bebebe;
+  background-color: #e07530;
 }
 
 .form {

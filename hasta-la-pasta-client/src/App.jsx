@@ -8,6 +8,14 @@ import EditRecipePage from "./pages/EditRecipePage";
 function App() {
   return (
     <BrowserRouter>
+      <img
+        src="/images/4000x559_Banner_Final.png"
+        alt="Hasta la Pasta"
+        style={{
+          width: "100%",
+          display: "block",
+        }}
+      />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/recipes/new" element={<AddRecipePage />} />

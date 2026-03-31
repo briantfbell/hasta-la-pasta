@@ -119,7 +119,7 @@ export default function RecipeDetailPage() {
                   key={ingredient.recipe_ingredient_id}
                   className={styles.ingredientItem}
                 >
-                  {ingredient.name} — {ingredient.quantity} {ingredient.unit}
+                  {ingredient.name} - {ingredient.quantity} {ingredient.unit}
                 </li>
               ))}
             </ul>
