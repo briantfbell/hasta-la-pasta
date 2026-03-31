@@ -1,0 +1,8 @@
+Home / Recipe List
+├── click recipe → Recipe Detail
+│   └── click edit → Edit Recipe Form
+├── click "Add Recipe" → Add Recipe Form
+├── filter by pasta type → (updates Recipe List)
+└── Nav
+    ├── → Ingredient List
+    └── → Pasta Type List
