@@ -27,6 +27,10 @@
   margin: 0;
 }
 
+.homeLink:hover {
+  background-color: #bebebe;
+}
+
 .layout {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

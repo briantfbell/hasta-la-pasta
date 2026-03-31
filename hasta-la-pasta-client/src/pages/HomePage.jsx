@@ -77,10 +77,11 @@ export default function HomePage() {
       <div className={styles.layout}>
         {/* Recipes Panel */}
         <section className={styles.panel}>
-          <h2 className={styles.panelHeader}>Recipes</h2>
-          <div>
+          <div className={styles.panelTopRow}>
+            <h2 className={styles.panelHeader}>Recipes</h2>
+
             <Link to="/recipes/new" className={styles.addLink}>
-              + Add New Recipe
+              Add New Recipe
             </Link>
           </div>
           {filteredRecipes.length === 0 ? (
@@ -124,7 +125,8 @@ export default function HomePage() {
 
         {/* Filter Panel */}
         <section className={styles.panel}>
-          <h2 className={styles.panelHeader}>Find a Pasta</h2>
+          <h2 className={styles.panelHeader}>Find a Recipe!</h2>
+          <br />
           <div className={styles.filterRow}>
             <label className={styles.filterLabel} htmlFor="meatType">
               Meat

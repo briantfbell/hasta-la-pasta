@@ -17,6 +17,11 @@ async function handleResponse(res) {
   return res.json();
 }
 
+export async function getIngredients() {
+  const res = await fetch(`${BASE_URL}/ingredients`);
+  return handleResponse(res);
+}
+
 export async function getRecipes() {
   const res = await fetch(`${BASE_URL}/recipes`);
   return handleResponse(res);

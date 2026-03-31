@@ -11,14 +11,20 @@
   padding: 20px;
 }
 
+.panelTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
 .panelHeader {
   background-color: #3d3d3d;
   color: white;
   padding: 8px 20px;
   border-radius: 20px;
-  display: inline-block;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin: 0;
 }
 
 /* Padding rule: top, right, bottom, left (think: clockwise from top) */
@@ -40,10 +46,6 @@
   font-weight: bold;
   margin: 0;
   color: #555;
-}
-
-.addLink:hover {
-  text-decoration: underline;
 }
 
 .recipeList {
@@ -123,10 +125,17 @@
 
 .addLink {
   display: inline-block;
-  margin-bottom: 16px;
-  font-weight: bold;
-  color: #f4873b;
+  background-color: #f4873b;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 20px;
   text-decoration: none;
+  font-weight: bold;
+  width: fit-content;
+}
+
+.addLink:hover {
+  background-color: #e07530;
 }
 
 .filterRow {
