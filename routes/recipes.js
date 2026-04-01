@@ -178,6 +178,8 @@ router.put("/:id", async (req, res, next) => {
       pasta_type_id,
       meat_type,
       sauce_type,
+      ingredients,
+      steps,
     } = req.body;
 
     const result = await db.query(
@@ -201,6 +203,30 @@ router.put("/:id", async (req, res, next) => {
 
     if (!result.rows.length) {
       return res.status(404).json({ error: "Recipe not found" });
+    }
+
+    // Replace all ingredients
+    await db.query("DELETE FROM recipe_ingredients WHERE recipe_id = $1", [id]);
+    if (ingredients && ingredients.length) {
+      for (const ing of ingredients) {
+        await db.query(
+          `INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity, unit)
+           VALUES ($1, $2, $3, $4)`,
+          [id, ing.ingredient_id, ing.quantity, ing.unit],
+        );
+      }
+    }
+
+    // Replace all steps
+    await db.query("DELETE FROM steps WHERE recipe_id = $1", [id]);
+    if (steps && steps.length) {
+      for (let i = 0; i < steps.length; i++) {
+        await db.query(
+          `INSERT INTO steps (recipe_id, step_number, instruction)
+           VALUES ($1, $2, $3)`,
+          [id, i + 1, steps[i]],
+        );
+      }
     }
 
     res.json(result.rows[0]);
