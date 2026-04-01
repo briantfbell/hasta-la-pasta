@@ -37,7 +37,7 @@ steps: id, recipe_id FK, step_number, instruction
 
 ### Prerequisites
 
-- Node.js (v18+)
+- Node.js
 - PostgreSQL
 - npm
 
@@ -131,22 +131,6 @@ I will likely add a Docker aspect in the future.
 | PUT    | `/api/pasta-types/:id`         | Update a pasta type                            |
 | DELETE | `/api/pasta-types/:id`         | Delete a pasta type                            |
 | GET    | `/api/pasta-types/:id/recipes` | Get all recipes for a pasta type               |
-
----
-
-## Running Tests
-
-From the `server/` directory:
-
-```bash
-# Unit tests
-npm test
-
-# Integration tests (requires a running database)
-npm run test:integration
-```
-
-Tests are written with Jest and Supertest. Integration tests hit the actual database — no mocks.
 
 ---
 
